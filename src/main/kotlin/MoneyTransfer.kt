@@ -1,5 +1,5 @@
 fun main() {
-    calculateCommission(100000, "Mir", 30000)
+    calculateCommission(5000, "Mir")
 }
 
 var commission: Double = 0.0
@@ -11,19 +11,16 @@ fun calculateCommission(
 ) {
     when (typeOfCard) {
         "VKPay" -> calculateCommissionForVKPay()
-        "MasterCard" -> calculateCommissionForMasterCardOrMaestro(previousTransfers, actualTransfer)
-        "Maestro" -> calculateCommissionForMasterCardOrMaestro(previousTransfers, actualTransfer)
-        "Visa" -> calculateCommissionForVisaOrMir(actualTransfer)
-        "Mir" -> calculateCommissionForVisaOrMir(actualTransfer)
+        "MasterCard", "Maestro" -> calculateCommissionForMasterCardOrMaestro(previousTransfers, actualTransfer)
+        "Visa", "Mir" -> calculateCommissionForVisaOrMir(actualTransfer)
     }
 }
 
 fun calculateCommissionForVisaOrMir(actualTransfer: Int) {
     val minLimit = 35
-    commission = if (actualTransfer <= minLimit) {
-        35.0
-    } else {
-        actualTransfer / 100 * 0.75
+    commission = actualTransfer * 0.0075
+    if (commission <= minLimit) {
+        commission = 35.0
     }
     println("Ваша комиссия составляет $commission рублей")
 }

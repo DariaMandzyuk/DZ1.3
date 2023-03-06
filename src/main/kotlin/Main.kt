@@ -1,11 +1,11 @@
 fun main() {
-    agoToText(39600)
+    agoToText(259200)
 }
 
 fun agoToText(time: Int) {
 
     when {
-        isTimeSeconds(time) -> println("Был в сети ${timeToText(time)} назад")
+        isTimeSeconds(time) -> println("Был в сети только что")
         isTimeMinuts(time) -> println("Был в сети ${timeToText(time)} назад")
         isTimeHours(time) -> println("Был в сети ${timeToText(time)} назад")
         isTimeYesterday(time) -> println("Был в сети вчера")
@@ -85,7 +85,7 @@ fun isTimeBeforeYesterday(time: Int): Boolean {
 }
 
 fun isTimeLongTimeAgo(time: Int): Boolean {
-    if (time > 60 * 60 * 24 * 3) {
+    if (time >= 60 * 60 * 24 * 3) {
         return true
     }
     return false
